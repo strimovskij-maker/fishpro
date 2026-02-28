@@ -21,9 +21,10 @@
             line-height: 1.6;
         }
 
+        /* ШАПКА */
         header {
             background: #111827;
-            padding: 20px;
+            padding: 15px 5%;
             position: fixed;
             width: 100%;
             top: 0;
@@ -31,17 +32,42 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
+            border-bottom: 1px solid #38bdf8;
         }
+
+        header h2 { color: #38bdf8; }
+
+        nav { display: flex; align-items: center; }
 
         nav a {
             color: white;
-            margin: 0 15px;
+            margin: 0 10px;
             text-decoration: none;
             transition: 0.3s;
+            font-size: 14px;
         }
 
         nav a:hover { color: #38bdf8; }
 
+        .lang-switch {
+            margin-left: 20px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            background: #374151;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .lang-btn:hover { background: #38bdf8; color: black; }
+
+        /* СЕКЦІЇ */
         section {
             padding: 100px 20px;
             min-height: 100vh;
@@ -55,24 +81,23 @@
             background-attachment: fixed;
         }
 
-        /* ТА САМА ПЕРША ФОТОГРАФІЯ */
         .hero {
             background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                              url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+                              url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');
         }
 
         #catalog { background: #1e293b; }
 
         .hero h1 {
             font-size: 3em;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             padding: 20px;
             border-radius: 10px;
+            margin-bottom: 20px;
         }
 
         .btn {
-            margin-top: 20px;
-            padding: 12px 25px;
+            padding: 15px 30px;
             background: #38bdf8;
             border: none;
             color: black;
@@ -83,112 +108,111 @@
             font-weight: bold;
         }
 
+        /* КАТАЛОГ */
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 25px;
             width: 100%;
             max-width: 1200px;
-            margin-top: 30px;
+            margin-top: 40px;
         }
 
         .card {
             background: #1f2937;
-            padding: 15px;
-            border-radius: 12px;
-            transition: 0.3s;
+            padding: 20px;
+            border-radius: 15px;
             border: 1px solid #374151;
+            text-align: center;
+            transition: 0.3s;
         }
 
-        /* СТИЛЬ ДЛЯ ФОТО ТОВАРУ */
+        .card:hover { transform: translateY(-10px); border-color: #38bdf8; }
+
         .card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-bottom: 15px;
+            display: block;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 20px #38bdf8;
-        }
+        .card h3 { color: #38bdf8; margin-bottom: 10px; }
 
         .price {
             font-weight: bold;
-            color: #38bdf8;
-            font-size: 1.2em;
-            margin-top: 10px;
+            color: white;
+            font-size: 1.3em;
+            margin-top: 15px;
         }
 
         footer {
             background: #111827;
             text-align: center;
-            padding: 20px;
+            padding: 30px;
+        }
+
+        @media(max-width:768px){
+            .hero h1 { font-size: 2em; }
+            nav { display: none; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h2>FishPro Ukraine</h2>
+    <h2>FishPro</h2>
     <nav>
         <a href="#home" data-ua="Головна" data-en="Home">Home</a>
         <a href="#catalog" data-ua="Каталог" data-en="Catalog">Catalog</a>
         <a href="#sales" data-ua="Акції" data-en="Sales">Sales</a>
         <a href="#contact" data-ua="Контакти" data-en="Contact">Contact</a>
     </nav>
+    <div class="lang-switch">
+        <button class="lang-btn" onclick="setLang('uk')">UA</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
 </header>
 
 <section class="hero" id="home">
-    <h1 data-ua="Професійні рибальські снасті" data-en="Professional Fishing Gear">
-        Professional Fishing Gear
-    </h1>
+    <h1 data-ua="Професійні рибальські снасті" data-en="Professional Fishing Gear">Professional Fishing Gear</h1>
     <a href="#catalog" class="btn" data-ua="Перейти до каталогу" data-en="Go to Catalog">Go to Catalog</a>
 </section>
 
 <section id="catalog">
-    <h2 data-ua="Каталог" data-en="Catalog">Catalog</h2>
+    <h2 data-ua="Каталог товарів" data-en="Catalog">Catalog</h2>
     <div class="products">
         
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1615910402438-48b967000213?q=80&w=1000" alt="Spinning">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Spinning">
             <h3>Спінінг Carbon Pro</h3>
-            <p data-ua="Високочутливий спінінг для лову хижака." data-en="High-sensitivity spinning rod for predators.">High-sensitivity spinning rod for predators.</p>
+            <p data-ua="Високочутливий спінінг для лову хижака." data-en="High-sensitivity spinning rod for predators.">Високочутливий спінінг для лову хижака.</p>
             <div class="price">2 450 грн</div>
         </div>
 
-        <div class="card">
-            <h3>Котушка Shimano</h3>
-            <p>Надійна котушка з плавним ходом.</p>
-            <div class="price">1 800 грн</div>
-        </div>
+        <div class="card"><h3>Котушка Shimano</h3><p>Надійна котушка з плавним ходом.</p><div class="price">1 800 грн</div></div>
+        <div class="card"><h3>Набір воблерів</h3><p>10 універсальних приманок.</p><div class="price">950 грн</div></div>
+        <div class="card"><h3>Шнур 150м</h3><p>Надміцний плетений шнур.</p><div class="price">550 грн</div></div>
+        <div class="card"><h3>Рюкзак</h3><p>Водонепроникний рюкзак.</p><div class="price">1 200 грн</div></div>
+        <div class="card"><h3>Підсак</h3><p>Складний алюмінієвий підсак.</p><div class="price">750 грн</div></div>
+        <div class="card"><h3>Гачки Owner</h3><p>Найгостріші японські гачки.</p><div class="price">120 грн</div></div>
+        <div class="card"><h3>Ехолот</h3><p>Портативний пошук риби.</p><div class="price">4 100 грн</div></div>
+        <div class="card"><h3>Чохол</h3><p>Жорсткий чохол 130 см.</p><div class="price">890 грн</div></div>
+        <div class="card"><h3>Коробка</h3><p>Органайзер для снастей.</p><div class="price">320 грн</div></div>
 
-        <div class="card">
-            <h3>Набір воблерів</h3>
-            <p>10 універсальних приманок.</p>
-            <div class="price">950 грн</div>
-        </div>
-        
-        <div class="card"><h3>Шнур 150м</h3><p>Надміцний</p><div class="price">550 грн</div></div>
-        <div class="card"><h3>Рюкзак</h3><p>Водонепроникний</p><div class="price">1200 грн</div></div>
-        <div class="card"><h3>Підсак</h3><p>Алюмінієвий</p><div class="price">750 грн</div></div>
-        <div class="card"><h3>Гачки Owner</h3><p>Професійні</p><div class="price">120 грн</div></div>
-        <div class="card"><h3>Ехолот</h3><p>Портативний</p><div class="price">4100 грн</div></div>
-        <div class="card"><h3>Чохол</h3><p>130 см</p><div class="price">890 грн</div></div>
-        <div class="card"><h3>Коробка</h3><p>Для дрібниць</p><div class="price">320 грн</div></div>
     </div>
 </section>
 
 <section id="sales">
     <h2 data-ua="Акції" data-en="Sales">Sales</h2>
-    <p data-ua="Знижка 20% на всі котушки!" data-en="20% discount on all reels!">20% discount on all reels!</p>
+    <p data-ua="Знижка 20% на всі котушки!" data-en="20% discount on all reels!">Знижка 20% на всі котушки!</p>
 </section>
 
 <section id="contact">
     <h2 data-ua="Контакти" data-en="Contact">Contact</h2>
-    <p>Email: fishpro@email.com</p>
-    <p>Phone: +380 00 000 0000</p>
+    <p>Email: info@fishpro.ua</p>
+    <p>Телефон: +380 67 000 00 00</p>
 </section>
 
 <footer>
@@ -196,15 +220,21 @@
 </footer>
 
 <script>
-    const userLang = navigator.language || navigator.userLanguage;
-    const elements = document.querySelectorAll("[data-ua]");
-
-    if(userLang.startsWith("uk")){
-        elements.forEach(el => el.textContent = el.getAttribute("data-ua"));
-    } else {
-        elements.forEach(el => el.textContent = el.getAttribute("data-en"));
+    function setLang(lang) {
+        const elements = document.querySelectorAll("[data-ua]");
+        elements.forEach(el => {
+            el.textContent = el.getAttribute("data-" + lang);
+        });
     }
+
+    // Авто-визначення при завантаженні
+    const userLang = navigator.language || navigator.userLanguage;
+    if(userLang.startsWith("uk")) setLang('uk');
+    else setLang('en');
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
