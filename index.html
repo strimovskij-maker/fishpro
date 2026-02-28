@@ -1,250 +1,191 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FishPro Ukraine</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FishPro Ukraine</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background: #0f172a; color: white; line-height: 1.6; }
 
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-body { background: #0f172a; color: white; }
-html { scroll-behavior: smooth; }
+        header {
+            background: #111827;
+            padding: 15px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid #38bdf8;
+        }
 
-header {
-    background: #111827;
-    padding: 15px 5%;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    border-bottom: 1px solid #38bdf8;
-}
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
 
-section {
-    padding: 120px 20px;
-    min-height: 100vh;
-}
+        nav a:hover { color: #38bdf8; }
 
-.hero {
-    text-align: center;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
-    background-size: cover;
-    background-position: center;
-}
+        .lang-switch { display: flex; gap: 10px; align-items: center; }
+        .lang-btn {
+            background: #38bdf8;
+            color: black;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+        }
 
-#catalog { background: #1e293b; }
+        section {
+            padding: 120px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    max-width: 1200px;
-    margin: 40px auto;
-}
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                              url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+        }
 
-.card {
-    background: #1f2937;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #374151;
-    cursor: pointer;
-    transition: 0.3s;
-}
+        #catalog { background: #1e293b; }
 
-.card:hover {
-    transform: translateY(-5px);
-    border-color: #38bdf8;
-}
+        h1 { font-size: 3em; margin-bottom: 20px; }
 
-.card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 30px;
+        }
 
-.price {
-    font-weight: bold;
-    color: #38bdf8;
-    font-size: 1.5em;
-    margin: 15px 0;
-}
+        .card {
+            background: #1f2937;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #374151;
+        }
 
-/* PRODUCT PAGE */
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #38bdf8;
+        }
 
-#product-page {
-    display: none;
-    background: #0f172a;
-}
+        .price { font-weight: bold; color: #38bdf8; font-size: 1.3em; margin-top: 10px; }
 
-.product-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
-}
-
-.product-image img {
-    width: 100%;
-    border-radius: 15px;
-    border: 1px solid #38bdf8;
-}
-
-.product-info h1 {
-    margin-bottom: 20px;
-    font-size: 28px;
-}
-
-.spec-group {
-    margin-top: 25px;
-}
-
-.spec-group h3 {
-    margin-bottom: 10px;
-    color: #38bdf8;
-    border-bottom: 1px solid #374151;
-    padding-bottom: 5px;
-}
-
-.spec-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 6px 0;
-    border-bottom: 1px solid #1f2937;
-    font-size: 14px;
-}
-
-.buy-btn, .back-btn {
-    padding: 12px 25px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.buy-btn {
-    background: #38bdf8;
-    color: black;
-    margin-right: 10px;
-}
-
-.buy-btn:hover {
-    background: #0ea5e9;
-}
-
-.back-btn {
-    background: #374151;
-    color: white;
-}
-
-.back-btn:hover {
-    background: #4b5563;
-}
-
-@media(max-width: 900px) {
-    .product-wrapper {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
+        footer { background: #111827; text-align: center; padding: 20px; }
+    </style>
 </head>
-
 <body>
 
 <header>
     <h2>FishPro</h2>
+    <nav>
+        <a href="#home" id="m1">Головна</a>
+        <a href="#catalog" id="m2">Каталог</a>
+        <a href="#blog" id="m3">Блог</a>
+        <a href="#reviews" id="m4">Відгуки</a>
+        <a href="#contact" id="m5">Контакти</a>
+    </nav>
+    <div class="lang-switch">
+        <button class="lang-btn" onclick="changeLang('uk')">UA</button>
+        <button class="lang-btn" onclick="changeLang('en')">EN</button>
+    </div>
 </header>
 
-<section class="hero">
-    <h1>Професійні рибальські снасті</h1>
+<section class="hero" id="home">
+    <h1 id="hero-title">Професійні рибальські снасті</h1>
 </section>
 
 <section id="catalog">
-    <h2 style="text-align:center;">Каталог товарів</h2>
-
+    <h2 id="cat-title">Каталог товарів</h2>
     <div class="products">
-
-        <div class="card" onclick="openProduct()">
+        
+        <div class="card">
             <img src="91.jfif" alt="Spinning">
-            <h3>Спінінг Black Fox Inspire Spin 802M</h3>
-            <p>2.44m | 4-24g</p>
+            <h3 id="p1-t">Спінінг Carbon Pro</h3>
+            <p id="p1-d">Високочутливий спінінг для лову хижака.</p>
             <div class="price">2 450 грн</div>
         </div>
 
+        <div class="card">
+            <img src="92.webp" alt="Reel">
+            <h3 id="p2-t">Котушка Shimano</h3>
+            <p id="p2-d">Надійна котушка з плавним ходом для далеких закидів.</p>
+            <div class="price">1 800 грн</div>
+        </div>
+
+        <div class="card">
+            <img src="93.webp" alt="Lures">
+            <h3 id="p3-t">Набір воблерів</h3>
+            <p id="p3-d">Набір з 10 універсальних приманок для будь-якої хижої риби.</p>
+            <div class="price">950 грн</div>
+        </div>
+
     </div>
 </section>
 
-<!-- PRODUCT PAGE -->
-
-<section id="product-page">
-
-<div class="product-wrapper">
-
-    <div class="product-image">
-        <img src="91.jfif" alt="Black Fox Inspire Spin">
-    </div>
-
-    <div class="product-info">
-        <h1>Спінінг Black Fox Inspire Spin 802M 2.44m 4-24g</h1>
-
-        <div class="price">2 450 грн</div>
-
-        <div class="spec-group">
-            <h3>Основні</h3>
-
-            <div class="spec-item"><span>Виробник</span><span>Black Fox</span></div>
-            <div class="spec-item"><span>Модель</span><span>Inspire Spin</span></div>
-            <div class="spec-item"><span>Тип вудлища</span><span>Спінінгове</span></div>
-            <div class="spec-item"><span>Конструкція</span><span>Штекерна</span></div>
-            <div class="spec-item"><span>Кількість секцій</span><span>2</span></div>
-        </div>
-
-        <div class="spec-group">
-            <h3>Характеристики</h3>
-
-            <div class="spec-item"><span>Довжина</span><span>244 см</span></div>
-            <div class="spec-item"><span>Транспортувальна довжина</span><span>127 см</span></div>
-            <div class="spec-item"><span>Тест</span><span>4-24 г</span></div>
-            <div class="spec-item"><span>Тип вершинки</span><span>Tubular</span></div>
-            <div class="spec-item"><span>Матеріал бланка</span><span>Карбон</span></div>
-            <div class="spec-item"><span>Кільця</span><span>SIC</span></div>
-            <div class="spec-item"><span>Матеріал руків'я</span><span>EVA</span></div>
-            <div class="spec-item"><span>Тип руків'я</span><span>Рознесена</span></div>
-        </div>
-
-        <button class="buy-btn">Купити</button>
-        <button class="back-btn" onclick="closeProduct()">Назад</button>
-
-    </div>
-
-</div>
-
-</section>
-
-<footer style="text-align:center; padding:20px; background:#111827;">
-    © 2026 FishPro Ukraine
+<footer id="contact">
+    <p>© 2026 FishPro Ukraine</p>
 </footer>
 
 <script>
-function openProduct() {
-    document.getElementById('catalog').style.display = 'none';
-    document.getElementById('product-page').style.display = 'block';
-    window.scrollTo(0,0);
-}
+    const lang = {
+        uk: {
+            m1: "Головна", m2: "Каталог", m3: "Блог", m4: "Відгуки", m5: "Контакти",
+            ht: "Професійні рибальські снасті", ct: "Каталог товарів",
+            p1t: "Спінінг Carbon Pro", p1d: "Високочутливий спінінг для лову хижака.",
+            p2t: "Котушка Shimano", p2d: "Надійна котушка з плавним ходом для далеких закидів.",
+            p3t: "Набір воблерів", p3d: "Набір з 10 універсальних приманок для будь-якої хижої риби."
+        },
+        en: {
+            m1: "Home", m2: "Catalog", m3: "Blog", m4: "Reviews", m5: "Contact",
+            ht: "Professional Fishing Gear", ct: "Product Catalog",
+            p1t: "Carbon Pro Rod", p1d: "High-sensitivity spinning rod for predators.",
+            p2t: "Shimano Reel", p2d: "Reliable reel with smooth action for long casts.",
+            p3t: "Lures Set", p3d: "Set of 10 universal lures for any predatory fish."
+        }
+    };
 
-function closeProduct() {
-    document.getElementById('catalog').style.display = 'block';
-    document.getElementById('product-page').style.display = 'none';
-}
+    function changeLang(l) {
+        document.getElementById('m1').textContent = lang[l].m1;
+        document.getElementById('m2').textContent = lang[l].m2;
+        document.getElementById('m3').textContent = lang[l].m3;
+        document.getElementById('m4').textContent = lang[l].m4;
+        document.getElementById('m5').textContent = lang[l].m5;
+        document.getElementById('hero-title').textContent = lang[l].ht;
+        document.getElementById('cat-title').textContent = lang[l].ct;
+        document.getElementById('p1-t').textContent = lang[l].p1t;
+        document.getElementById('p1-d').textContent = lang[l].p1d;
+        document.getElementById('p2-t').textContent = lang[l].p2t;
+        document.getElementById('p2-d').textContent = lang[l].p2d;
+        document.getElementById('p3-t').textContent = lang[l].p3t;
+        document.getElementById('p3-d').textContent = lang[l].p3d;
+    }
+</script>
+
+</body>
+</html>
 </script>
 
 </body>
