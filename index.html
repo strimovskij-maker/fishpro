@@ -55,7 +55,6 @@
             text-align: center;
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
         }
 
         .hero {
@@ -97,7 +96,6 @@
 
         .price { font-weight: bold; color: #38bdf8; font-size: 1.3em; margin-top: 10px; }
 
-        /* Стилі сторінки товару */
         #product-page {
             display: none;
             padding: 150px 5% 50px;
@@ -128,8 +126,6 @@
 
         .description-text { margin: 20px 0; color: #cbd5e1; }
         .description-text p { margin-bottom: 15px; }
-        .description-text ul { margin-left: 20px; margin-bottom: 20px; }
-        .description-text li { margin-bottom: 8px; }
 
         .back-btn {
             background: #374151;
@@ -163,8 +159,8 @@
         <a href="#contact" id="m5">Контакти</a>
     </nav>
     <div class="lang-switch">
-        <button class="lang-btn" onclick="changeLang('uk')">UA</button>
-        <button class="lang-btn" onclick="changeLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLanguage('uk')">UA</button>
+        <button class="lang-btn" onclick="setLanguage('en')">EN</button>
     </div>
 </header>
 
@@ -190,10 +186,10 @@
                 <div class="price">1 800 грн</div>
             </div>
 
-            <div class="card">
+            <div class="card" onclick="openProduct('lures')">
                 <img src="93.webp" alt="Lures">
-                <h3 id="p3-t">Набір воблерів</h3>
-                <p id="p3-d">Набір з 10 універсальних приманок для будь-якої хижої риби.</p>
+                <h3 id="p3-t">Набір воблерів Columbia Orbit</h3>
+                <p id="p3-d">Професійні суспендери для лову щуки та окуня.</p>
                 <div class="price">950 грн</div>
             </div>
         </div>
@@ -202,11 +198,10 @@
 
 <div id="product-page">
     <div class="product-left">
-        <button class="back-btn" onclick="showMain()">← Назад до каталогу</button>
+        <button class="back-btn" id="back-btn-text" onclick="showMain()">← Назад до каталогу</button>
         <img id="pp-img" src="" alt="Product Image">
     </div>
-    <div class="product-right" id="pp-content">
-        </div>
+    <div class="product-right" id="pp-content"></div>
 </div>
 
 <footer id="contact">
@@ -214,129 +209,147 @@
 </footer>
 
 <script>
-    const lang = {
+    let currentLang = 'uk';
+    let currentProductType = null;
+
+    const uiLang = {
         uk: {
             m1: "Головна", m2: "Каталог", m3: "Блог", m4: "Відгуки", m5: "Контакти",
             ht: "Професійні рибальські снасті", ct: "Каталог товарів",
             p1t: "Спінінг Golden Catch Flick", p1d: "Ультралайтове вудилище з гнучким та пружним бланком.",
-            p2t: "Котушка LINNHUE EA 12000", p2d: "Надійна котушка з плавним ходом для далеких закидів."
+            p2t: "Котушка LINNHUE EA 12000", p2d: "Надійна котушка з плавним ходом для далеких закидів.",
+            p3t: "Набір воблерів Columbia Orbit", p3d: "Професійні суспендери для лову щуки та окуня.",
+            back: "← Назад до каталогу", buy: "КУПИТИ"
         },
         en: {
             m1: "Home", m2: "Catalog", m3: "Blog", m4: "Reviews", m5: "Contact",
             ht: "Professional Fishing Gear", ct: "Product Catalog",
             p1t: "Golden Catch Flick Rod", p1d: "Ultralight rod with flexible and resilient blank.",
-            p2t: "LINNHUE EA 12000 Reel", p2d: "Reliable reel with smooth action for long casts."
+            p2t: "LINNHUE EA 12000 Reel", p2d: "Reliable reel with smooth action for long casts.",
+            p3t: "Columbia Orbit Lure Set", p3d: "Professional suspenders for pike and perch.",
+            back: "← Back to Catalog", buy: "BUY NOW"
         }
     };
 
     const productData = {
         spinning: {
             img: "91.jfif",
-            title: "Спінінг Golden Catch Flick FLS-682ULS 2.03m 0.3-4g",
-            price: "2 450 грн",
-            desc: `
-                <p>Ультралайтове вудилище Flick володіє дуже гнучким і в той же час пружним бланком, який забезпечує комфортний заброс і анімацію приманок у всьому тестовому діапазоні вудилища. Гнучкий кінчик дозволяє візуально контролювати торкання дна під час проведення і найделікатніші покльовки.</p>
-                <p>Вудлище оснащене противозахлестными легкими кільцями SiC К-серії зі вставками з високим ступенем полірування, що знижує тертя, продовжує термін служби ліски/шнура і збільшує дальність закидання. Рознесена ергономічна рукоятка з EVA і ергономічна гайка катушкотримача забезпечує хороший баланс і комфорт в будь-яких погодних умовах.</p>
-                <p>Незважаючи на дуже витончений бланк, вудилище володіє високими, як для спінінгів такого класу, стримуючими характеристиками, дозволяє впоратися навіть з відносно великими трофеями.</p>
-                <p>Flick, як і годиться справжньому ультралайтовому вудилища, відмінно справляється з усіма типами дрібних приманок. Забезпечує чудовий заброс і контроль над микроджиговыми приманками, відмінно справляється з микроколебалками, дрібними кренками.</p>
-            `,
-            specsHTML: `
-                <h4>Характеристики та опис</h4>
-                <div class="spec-item"><span class="spec-label">Вага</span> <span class="spec-value">76 г</span></div>
-                <div class="spec-item"><span class="spec-label">Виробник</span> <span class="spec-value">Golden Catch</span></div>
-                <div class="spec-item"><span class="spec-label">Довжина у складеному вигляді</span> <span class="spec-value">107 см</span></div>
-                <div class="spec-item"><span class="spec-label">Тип</span> <span class="spec-value">Спінінг</span></div>
-                <div class="spec-item"><span class="spec-label">Кількість секцій</span> <span class="spec-value">2</span></div>
-                <div class="spec-item"><span class="spec-label">Конструкція</span> <span class="spec-value">Штекерна</span></div>
-                <div class="spec-item"><span class="spec-label">Клас</span> <span class="spec-value">Ультралегкий</span></div>
-                <div class="spec-item"><span class="spec-label">Кастинг-тест</span> <span class="spec-value">0.5-6 г</span></div>
-                <div class="spec-item"><span class="spec-label">Матеріал вудилища</span> <span class="spec-value">Карбон</span></div>
-                <div class="spec-item"><span class="spec-label">Довжина в розкладеному вигляді</span> <span class="spec-value">2.03 м</span></div>
-                <div class="spec-item"><span class="spec-label">Сезон</span> <span class="spec-value">Літо</span></div>
-                <div class="spec-item"><span class="spec-label">Матеріал рукоятки</span> <span class="spec-value">ЕВА</span></div>
-                
-                <h4>Додаткові характеристики</h4>
-                <div class="spec-item"><span class="spec-label">Тест (реальний)</span> <span class="spec-value">0,3-4 г</span></div>
-                <div class="spec-item"><span class="spec-label">Матеріал бланка</span> <span class="spec-value">Графіт</span></div>
-                <div class="spec-item"><span class="spec-label">Лад</span> <span class="spec-value">Супер-швидкий (Extra-Fast)</span></div>
-                <div class="spec-item"><span class="spec-label">Рекомендований шнур</span> <span class="spec-value">0.1 - 0.4 PE</span></div>
-                <div class="spec-item"><span class="spec-label">Комплектація</span> <span class="spec-value">Чохол в комплекті</span></div>
-            `
+            uk: {
+                title: "Спінінг Golden Catch Flick FLS-682ULS 2.03m 0.3-4g",
+                price: "2 450 грн",
+                desc: `<p>Ультралайтове вудилище Flick володіє гнучким і пружним бланком для комфортного закидання. Кільця SiC К-серії знижують тертя та збільшують дальність.</p>`,
+                specs: `<h4>Характеристики</h4><div class="spec-item"><span class="spec-label">Вага</span><span class="spec-value">76 г</span></div><div class="spec-item"><span class="spec-label">Виробник</span><span class="spec-value">Golden Catch</span></div>`
+            },
+            en: {
+                title: "Golden Catch Flick Spinning Rod",
+                price: "2 450 UAH",
+                desc: `<p>Ultralight Flick rod features a flexible and resilient blank for comfortable casting. SiC K-series rings reduce friction and increase distance.</p>`,
+                specs: `<h4>Specifications</h4><div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">76 g</span></div><div class="spec-item"><span class="spec-label">Brand</span><span class="spec-value">Golden Catch</span></div>`
+            }
         },
         reel: {
             img: "92.webp",
-            title: "Котушка безінерційна LINNHUE EA 12000",
-            price: "1 800 грн",
-            desc: `
-                <p>Котушка безінерційна LINNHUE EA 12000 — це ідеальний вибір як для рибалок-початківців, так і для досвідчених любителів риболовлі. Поєднуючи в собі надійність, легкість і високу продуктивність, ця котушка стане вашим надійним помічником на водоймах.</p>
-                <p>Однією з ключових особливостей LINNHUE EA є її безінерційна конструкція, яка значно знижує ризик утворення «бороди» при закиданні. Це робить її особливо привабливою для новачків. Завдяки цьому, ви зможете зосередитися на процесі, а не на усуненні неполадок.</p>
-                <h4>Переваги:</h4>
-                <ul>
-                    <li><strong>Легка вага:</strong> Катушка виготовлена з комбінації металу та пластику, що забезпечує мінімальну вагу без шкоди для міцності.</li>
-                    <li><strong>Універсальний передавальний коефіцієнт:</strong> 4.9:1 дозволяє використовувати котушку для різних стилів ловлі.</li>
-                    <li><strong>Задній фрикційне гальмо:</strong> Забезпечує захист від обриву волосіні та допомагає контролювати ривки риби.</li>
-                    <li><strong>Ергономічна ручка:</strong> Спеціальна форма ручки запобігає вислизанню з рук.</li>
-                    <li><strong>Місткість:</strong> Котушка вміщує значну кількість волосіні для дальніх закидів.</li>
-                </ul>
-                <p>Вибираючи продукцію LINNHUE, ви отримуєте надійне обладнання за доступною ціною, здатне конкурувати з більш дорогими аналогами.</p>
-            `,
-            specsHTML: `
-                <h4>Основні характеристики</h4>
-                <div class="spec-item"><span class="spec-label">Виробник</span> <span class="spec-value">LINNHUE</span></div>
-                <div class="spec-item"><span class="spec-label">Країна виробник</span> <span class="spec-value">Китай</span></div>
-                <div class="spec-item"><span class="spec-label">Вага</span> <span class="spec-value">679 г</span></div>
-                <div class="spec-item"><span class="spec-label">Гарантійний термін</span> <span class="spec-value">1 міс</span></div>
-                <div class="spec-item"><span class="spec-label">Матеріал корпусу</span> <span class="spec-value">Пластик, Метал</span></div>
-                <div class="spec-item"><span class="spec-label">Розташування рукоятки</span> <span class="spec-value">Універсальне</span></div>
-                <div class="spec-item"><span class="spec-label">Тип</span> <span class="spec-value">Безінерційна</span></div>
-                <div class="spec-item"><span class="spec-label">Фрикційне гальмо</span> <span class="spec-value">Заднє</span></div>
-                <h4>Користувальницькі характеристики</h4>
-                <div class="spec-item"><span class="spec-label">Глибина дротяної чашки</span> <span class="spec-value">0.9 см</span></div>
-                <div class="spec-item"><span class="spec-label">Довжина катушки</span> <span class="spec-value">17.5 см</span></div>
-                <div class="spec-item"><span class="spec-label">Місткість шпулі</span> <span class="spec-value">0.40/400, 0.47/330, 0.52/290</span></div>
-                <div class="spec-item"><span class="spec-label">Кількість осей</span> <span class="spec-value">12+1</span></div>
-                <div class="spec-item"><span class="spec-label">Передавальний коефіцієнт</span> <span class="spec-value">4.9:1</span></div>
-                <div class="spec-item"><span class="spec-label">Розвантажувальна сила</span> <span class="spec-value">10 кг</span></div>
-                <div class="spec-item"><span class="spec-label">Розмір</span> <span class="spec-value">12000</span></div>
-                <div class="spec-item"><span class="spec-label">Ширина катушки</span> <span class="spec-value">12 см</span></div>
-            `
+            uk: {
+                title: "Котушка LINNHUE EA 12000",
+                price: "1 800 грн",
+                desc: `<p>Безінерційна конструкція знижує ризик утворення «бороди». Задній фрикціон захищає від обриву волосіні.</p>`,
+                specs: `<h4>Основні характеристики</h4><div class="spec-item"><span class="spec-label">Виробник</span><span class="spec-value">LINNHUE</span></div>`
+            },
+            en: {
+                title: "LINNHUE EA 12000 Reel",
+                price: "1 800 UAH",
+                desc: `<p>The spin-free design reduces the risk of line tangles. Rear drag protection prevents line breakage.</p>`,
+                specs: `<h4>Specifications</h4><div class="spec-item"><span class="spec-label">Brand</span><span class="spec-value">LINNHUE</span></div>`
+            }
+        },
+        lures: {
+            img: "93.webp",
+            uk: {
+                title: "Воблер Columbia Orbit 110 SP-SR",
+                price: "950 грн",
+                desc: `
+                    <p>Серія воблерів Orbit від Columbia Fishing створена для лову хижака. Orbit 110 SP-SR є універсалом і користується найбільшою популярністю.</p>
+                    <p>Всередині розташована система балансування Mag Drive з вольфрамовим вантажем MZ-19, що покращує дальність закидання та контроль приманки.</p>
+                    <p>Під час твічінгу воблер "апетитно клює носом", нагадуючи хижаку малька, що годується.</p>
+                `,
+                specs: `
+                    <h4>Характеристики та опис</h4>
+                    <div class="spec-item"><span class="spec-label">Тип</span> <span class="spec-value">Воблер</span></div>
+                    <div class="spec-item"><span class="spec-label">Форма тіла</span> <span class="spec-value">Мінноу (Minnow)</span></div>
+                    <div class="spec-item"><span class="spec-label">Вага</span> <span class="spec-value">16.5 г</span></div>
+                    <div class="spec-item"><span class="spec-label">Плавучість</span> <span class="spec-value">Суспендер</span></div>
+                    <div class="spec-item"><span class="spec-label">Довжина</span> <span class="spec-value">110 мм</span></div>
+                    <h4>Робоча глибина</h4>
+                    <div class="spec-item"><span class="spec-label">Макс. заглиблення</span> <span class="spec-value">1.2 м</span></div>
+                    <div class="spec-item"><span class="spec-label">Мін. заглиблення</span> <span class="spec-value">0.8 м</span></div>
+                `
+            },
+            en: {
+                title: "Columbia Orbit 110 SP-SR Lure",
+                price: "950 UAH",
+                desc: `
+                    <p>The Orbit series by Columbia Fishing is designed for predatory fish. The 110 SP-SR is a versatile model and the most popular among anglers.</p>
+                    <p>Equipped with the Mag Drive balancing system and tungsten weight MZ-19 for superior casting distance and control.</p>
+                    <p>During twitching, the lure mimics a feeding baitfish, attracting predators effectively.</p>
+                `,
+                specs: `
+                    <h4>Specifications</h4>
+                    <div class="spec-item"><span class="spec-label">Type</span> <span class="spec-value">Lure</span></div>
+                    <div class="spec-item"><span class="spec-label">Body shape</span> <span class="spec-value">Minnow</span></div>
+                    <div class="spec-item"><span class="spec-label">Weight</span> <span class="spec-value">16.5 g</span></div>
+                    <div class="spec-item"><span class="spec-label">Buoyancy</span> <span class="spec-value">Suspender</span></div>
+                `
+            }
         }
     };
 
-    function changeLang(l) {
-        document.getElementById('m1').textContent = lang[l].m1;
-        document.getElementById('m2').textContent = lang[l].m2;
-        document.getElementById('m3').textContent = lang[l].m3;
-        document.getElementById('m4').textContent = lang[l].m4;
-        document.getElementById('m5').textContent = lang[l].m5;
-        document.getElementById('hero-title').textContent = lang[l].ht;
-        document.getElementById('cat-title').textContent = lang[l].ct;
-        document.getElementById('p1-t').textContent = lang[l].p1t;
-        document.getElementById('p1-d').textContent = lang[l].p1d;
-        document.getElementById('p2-t').textContent = lang[l].p2t;
-        document.getElementById('p2-d').textContent = lang[l].p2d;
+    function setLanguage(l) {
+        currentLang = l;
+        document.getElementById('m1').textContent = uiLang[l].m1;
+        document.getElementById('m2').textContent = uiLang[l].m2;
+        document.getElementById('m3').textContent = uiLang[l].m3;
+        document.getElementById('m4').textContent = uiLang[l].m4;
+        document.getElementById('m5').textContent = uiLang[l].m5;
+        document.getElementById('hero-title').textContent = uiLang[l].ht;
+        document.getElementById('cat-title').textContent = uiLang[l].ct;
+        document.getElementById('p1-t').textContent = uiLang[l].p1t;
+        document.getElementById('p1-d').textContent = uiLang[l].p1d;
+        document.getElementById('p2-t').textContent = uiLang[l].p2t;
+        document.getElementById('p2-d').textContent = uiLang[l].p2d;
+        document.getElementById('p3-t').textContent = uiLang[l].p3t;
+        document.getElementById('p3-d').textContent = uiLang[l].p3d;
+        document.getElementById('back-btn-text').textContent = uiLang[l].back;
+        if (currentProductType) renderProduct();
     }
 
     function openProduct(type) {
-        const data = productData[type];
-        document.getElementById('pp-img').src = data.img;
-        document.getElementById('pp-content').innerHTML = `
-            <h2>${data.title}</h2>
-            <div class="description-text">${data.desc}</div>
-            <div class="price-large">${data.price}</div>
-            <button class="lang-btn" style="padding: 15px 40px; font-size: 1.1em; width: 100%;">КУПИТИ</button>
-            <div class="specs-container">${data.specsHTML}</div>
-        `;
+        currentProductType = type;
+        renderProduct();
         document.getElementById('main-content').style.display = 'none';
         document.getElementById('product-page').style.display = 'grid';
         window.scrollTo(0,0);
     }
 
+    function renderProduct() {
+        const data = productData[currentProductType];
+        const content = data[currentLang];
+        document.getElementById('pp-img').src = data.img;
+        document.getElementById('pp-content').innerHTML = `
+            <h2>${content.title}</h2>
+            <div class="description-text">${content.desc}</div>
+            <div class="price-large">${content.price}</div>
+            <button class="lang-btn" style="padding: 15px 40px; font-size: 1.1em; width: 100%;">${uiLang[currentLang].buy}</button>
+            <div class="specs-container">${content.specs}</div>
+        `;
+    }
+
     function showMain() {
+        currentProductType = null;
         document.getElementById('main-content').style.display = 'block';
         document.getElementById('product-page').style.display = 'none';
     }
 </script>
-
+</body>
+</html>
 </body>
 </html>
