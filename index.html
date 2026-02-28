@@ -9,7 +9,6 @@
         html { scroll-behavior: smooth; }
         body { background: #0f172a; color: white; line-height: 1.6; }
 
-        /* ШАПКА З МЕНЮ */
         header {
             background: #111827;
             padding: 15px 5%;
@@ -45,7 +44,6 @@
             font-weight: bold;
         }
 
-        /* СЕКЦІЇ */
         section {
             padding: 120px 20px;
             min-height: 100vh;
@@ -68,7 +66,6 @@
 
         h1 { font-size: 3em; margin-bottom: 20px; }
 
-        /* КАТАЛОГ */
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -138,6 +135,13 @@
             <div class="price">1 800 грн</div>
         </div>
 
+        <div class="card">
+            <img src="93.webp" alt="Lures">
+            <h3 id="p3-t">Набір воблерів</h3>
+            <p id="p3-d">Набір з 10 універсальних приманок для будь-якої хижої риби.</p>
+            <div class="price">950 грн</div>
+        </div>
+
     </div>
 </section>
 
@@ -151,13 +155,15 @@
             m1: "Головна", m2: "Каталог", m3: "Блог", m4: "Відгуки", m5: "Контакти",
             ht: "Професійні рибальські снасті", ct: "Каталог товарів",
             p1t: "Спінінг Carbon Pro", p1d: "Високочутливий спінінг для лову хижака.",
-            p2t: "Котушка Shimano", p2d: "Надійна котушка з плавним ходом для далеких закидів."
+            p2t: "Котушка Shimano", p2d: "Надійна котушка з плавним ходом для далеких закидів.",
+            p3t: "Набір воблерів", p3d: "Набір з 10 універсальних приманок для будь-якої хижої риби."
         },
         en: {
             m1: "Home", m2: "Catalog", m3: "Blog", m4: "Reviews", m5: "Contact",
             ht: "Professional Fishing Gear", ct: "Product Catalog",
             p1t: "Carbon Pro Rod", p1d: "High-sensitivity spinning rod for predators.",
-            p2t: "Shimano Reel", p2d: "Reliable reel with smooth action for long casts."
+            p2t: "Shimano Reel", p2d: "Reliable reel with smooth action for long casts.",
+            p3t: "Lures Set", p3d: "Set of 10 universal lures for any predatory fish."
         }
     };
 
@@ -173,6 +179,8 @@
         document.getElementById('p1-d').textContent = lang[l].p1d;
         document.getElementById('p2-t').textContent = lang[l].p2t;
         document.getElementById('p2-d').textContent = lang[l].p2d;
+        document.getElementById('p3-t').textContent = lang[l].p3t;
+        document.getElementById('p3-d').textContent = lang[l].p3d;
     }
 </script>
 
