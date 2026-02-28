@@ -29,6 +29,7 @@
             transition: 0.3s;
             font-size: 14px;
             text-transform: uppercase;
+            cursor: pointer;
         }
 
         nav a:hover { color: #38bdf8; }
@@ -80,7 +81,10 @@
             padding: 20px;
             border-radius: 12px;
             border: 1px solid #374151;
+            cursor: pointer;
+            transition: 0.3s;
         }
+        .card:hover { border-color: #38bdf8; }
 
         .card img {
             width: 100%;
@@ -93,16 +97,64 @@
 
         .price { font-weight: bold; color: #38bdf8; font-size: 1.3em; margin-top: 10px; }
 
+        /* Стилі для картки товару */
+        #product-page {
+            display: none;
+            padding: 150px 5% 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            text-align: left;
+            align-items: start;
+        }
+
+        .product-left img {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid #38bdf8;
+            position: sticky;
+            top: 150px;
+        }
+
+        .product-right h2 { font-size: 2.2em; margin-bottom: 10px; color: #38bdf8; }
+        .product-right .price-large { font-size: 2em; margin: 20px 0; color: #fff; font-weight: bold; }
+        
+        .specs-container { margin-top: 30px; }
+        .specs-container h4 { color: #38bdf8; text-transform: uppercase; margin-bottom: 15px; border-bottom: 1px solid #374151; padding-bottom: 5px; }
+        .spec-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px id solid #1e293b; font-size: 0.95em; }
+        .spec-label { color: #94a3b8; }
+        .spec-value { color: #f8fafc; font-weight: 500; }
+
+        .description-text { margin: 20px 0; color: #cbd5e1; }
+
+        .back-btn {
+            background: #374151;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .back-btn:hover { background: #4b5563; }
+
         footer { background: #111827; text-align: center; padding: 20px; }
+
+        @media (max-width: 768px) {
+            #product-page { grid-template-columns: 1fr; padding-top: 100px; }
+            .product-left img { position: static; }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h2>FishPro</h2>
+    <h2 onclick="showMain()" style="cursor:pointer">FishPro</h2>
     <nav>
-        <a href="#home" id="m1">Головна</a>
-        <a href="#catalog" id="m2">Каталог</a>
+        <a onclick="showMain()" id="m1">Головна</a>
+        <a href="#catalog" onclick="showMain()" id="m2">Каталог</a>
         <a href="#blog" id="m3">Блог</a>
         <a href="#reviews" id="m4">Відгуки</a>
         <a href="#contact" id="m5">Контакти</a>
@@ -113,37 +165,74 @@
     </div>
 </header>
 
-<section class="hero" id="home">
-    <h1 id="hero-title">Професійні рибальські снасті</h1>
-</section>
+<div id="main-content">
+    <section class="hero" id="home">
+        <h1 id="hero-title">Професійні рибальські снасті</h1>
+    </section>
 
-<section id="catalog">
-    <h2 id="cat-title">Каталог товарів</h2>
-    <div class="products">
-        
-        <div class="card">
-            <img src="91.jfif" alt="Spinning">
-            <h3 id="p1-t">Спінінг Carbon Pro</h3>
-            <p id="p1-d">Високочутливий спінінг для лову хижака.</p>
-            <div class="price">2 450 грн</div>
+    <section id="catalog">
+        <h2 id="cat-title">Каталог товарів</h2>
+        <div class="products">
+            <div class="card" onclick="openProduct()">
+                <img src="91.jfif" alt="Spinning">
+                <h3 id="p1-t">Спінінг Black Fox Inspire Spin</h3>
+                <p id="p1-d">Високочутливий спінінг для лову хижака.</p>
+                <div class="price">2 450 грн</div>
+            </div>
+
+            <div class="card">
+                <img src="92.webp" alt="Reel">
+                <h3 id="p2-t">Котушка Shimano</h3>
+                <p id="p2-d">Надійна котушка з плавним ходом для далеких закидів.</p>
+                <div class="price">1 800 грн</div>
+            </div>
+
+            <div class="card">
+                <img src="93.webp" alt="Lures">
+                <h3 id="p3-t">Набір воблерів</h3>
+                <p id="p3-d">Набір з 10 універсальних приманок для будь-якої хижої риби.</p>
+                <div class="price">950 грн</div>
+            </div>
         </div>
+    </section>
+</div>
 
-        <div class="card">
-            <img src="92.webp" alt="Reel">
-            <h3 id="p2-t">Котушка Shimano</h3>
-            <p id="p2-d">Надійна котушка з плавним ходом для далеких закидів.</p>
-            <div class="price">1 800 грн</div>
-        </div>
-
-        <div class="card">
-            <img src="93.webp" alt="Lures">
-            <h3 id="p3-t">Набір воблерів</h3>
-            <p id="p3-d">Набір з 10 універсальних приманок для будь-якої хижої риби.</p>
-            <div class="price">950 грн</div>
-        </div>
-
+<div id="product-page">
+    <div class="product-left">
+        <button class="back-btn" onclick="showMain()">← Назад до каталогу</button>
+        <img src="91.jfif" alt="Spinning Large">
     </div>
-</section>
+    <div class="product-right">
+        <h2 id="pp-title">Спінінг Black Fox Inspire Spin 802M 2.44m 4-24g</h2>
+        
+        <div class="description-text">
+            <p id="pp-desc">Професійне вудлище, виготовлене з високомодульного карбону. Ідеально підходить для джигової ловлі та твічінгу. Забезпечує максимальну дальність закиду та контроль над приманкою.</p>
+        </div>
+
+        <div class="price-large">2 450 грн</div>
+        <button class="lang-btn" style="padding: 15px 40px; font-size: 1.1em; width: 100%;">КУПИТИ</button>
+
+        <div class="specs-container">
+            <h4>Характеристики та опис</h4>
+            
+            <div class="spec-item"><span class="spec-label">Виробник</span> <span class="spec-value">Black Fox</span></div>
+            <div class="spec-item"><span class="spec-label">Кількість секцій</span> <span class="spec-value">2</span></div>
+            
+            <h4 style="margin-top:20px;">Користувальницькі характеристики</h4>
+            <div class="spec-item"><span class="spec-label">Довжина транспортувальна</span> <span class="spec-value">127 см</span></div>
+            <div class="spec-item"><span class="spec-label">Довжина</span> <span class="spec-value">244 см</span></div>
+            <div class="spec-item"><span class="spec-label">Конструкція вудилища</span> <span class="spec-value">Штекерна</span></div>
+            <div class="spec-item"><span class="spec-label">Кільця, матеріал</span> <span class="spec-value">SIC</span></div>
+            <div class="spec-item"><span class="spec-label">Матеріал руків'я</span> <span class="spec-value">EVA</span></div>
+            <div class="spec-item"><span class="spec-label">Матеріал бланка</span> <span class="spec-value">Карбон</span></div>
+            <div class="spec-item"><span class="spec-label">Модель</span> <span class="spec-value">Inspire Spin</span></div>
+            <div class="spec-item"><span class="spec-label">Тест</span> <span class="spec-value">4-24 г</span></div>
+            <div class="spec-item"><span class="spec-label">Тип вершинки</span> <span class="spec-value">Tubular</span></div>
+            <div class="spec-item"><span class="spec-label">Тип вудлища</span> <span class="spec-value">Спінінгове</span></div>
+            <div class="spec-item"><span class="spec-label">Тип руків'я</span> <span class="spec-value">Рознесена</span></div>
+        </div>
+    </div>
+</div>
 
 <footer id="contact">
     <p>© 2026 FishPro Ukraine</p>
@@ -154,14 +243,14 @@
         uk: {
             m1: "Головна", m2: "Каталог", m3: "Блог", m4: "Відгуки", m5: "Контакти",
             ht: "Професійні рибальські снасті", ct: "Каталог товарів",
-            p1t: "Спінінг Carbon Pro", p1d: "Високочутливий спінінг для лову хижака.",
+            p1t: "Спінінг Black Fox Inspire Spin", p1d: "Високочутливий спінінг для лову хижака.",
             p2t: "Котушка Shimano", p2d: "Надійна котушка з плавним ходом для далеких закидів.",
             p3t: "Набір воблерів", p3d: "Набір з 10 універсальних приманок для будь-якої хижої риби."
         },
         en: {
             m1: "Home", m2: "Catalog", m3: "Blog", m4: "Reviews", m5: "Contact",
             ht: "Professional Fishing Gear", ct: "Product Catalog",
-            p1t: "Carbon Pro Rod", p1d: "High-sensitivity spinning rod for predators.",
+            p1t: "Black Fox Inspire Spin Rod", p1d: "High-sensitivity spinning rod for predators.",
             p2t: "Shimano Reel", p2d: "Reliable reel with smooth action for long casts.",
             p3t: "Lures Set", p3d: "Set of 10 universal lures for any predatory fish."
         }
@@ -181,6 +270,17 @@
         document.getElementById('p2-d').textContent = lang[l].p2d;
         document.getElementById('p3-t').textContent = lang[l].p3t;
         document.getElementById('p3-d').textContent = lang[l].p3d;
+    }
+
+    function openProduct() {
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('product-page').style.display = 'grid';
+        window.scrollTo(0,0);
+    }
+
+    function showMain() {
+        document.getElementById('main-content').style.display = 'block';
+        document.getElementById('product-page').style.display = 'none';
     }
 </script>
 
