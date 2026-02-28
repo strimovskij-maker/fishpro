@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FishPro Ukraine</title>
+    <title>FishPro Ukraine - Магазин рибальських снастей</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         html { scroll-behavior: smooth; }
         body { background: #0f172a; color: white; line-height: 1.6; }
 
+        /* Шапка сайту */
         header {
             background: #111827;
-            padding: 15px 5%;
+            padding: 20px 5%;
             position: fixed;
             width: 100%;
             top: 0;
@@ -19,8 +20,10 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            border-bottom: 1px solid #38bdf8;
+            border-bottom: 2px solid #38bdf8;
         }
+
+        .logo { font-size: 24px; font-weight: bold; color: #38bdf8; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
 
         nav a {
             color: white;
@@ -29,135 +32,175 @@
             transition: 0.3s;
             font-size: 14px;
             text-transform: uppercase;
+            font-weight: 600;
             cursor: pointer;
         }
 
         nav a:hover { color: #38bdf8; }
 
-        .lang-switch { display: flex; gap: 10px; align-items: center; }
+        .lang-switch { display: flex; gap: 12px; align-items: center; }
         .lang-btn {
             background: #38bdf8;
-            color: black;
+            color: #000;
             border: none;
-            padding: 5px 10px;
+            padding: 6px 12px;
             cursor: pointer;
             border-radius: 4px;
             font-weight: bold;
+            transition: 0.3s;
         }
+        .lang-btn:hover { background: white; }
 
+        /* Секції */
         section {
-            padding: 120px 20px;
+            padding: 140px 20px 80px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             text-align: center;
-            background-size: cover;
-            background-position: center;
         }
 
         .hero {
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+            background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), 
                               url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+            background-size: cover;
+            background-position: center;
+            justify-content: center;
         }
 
-        #catalog { background: #1e293b; }
+        .hero h1 { font-size: 4em; margin-bottom: 20px; color: #f8fafc; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
 
-        h1 { font-size: 3em; margin-bottom: 20px; }
+        #catalog { background: #1e293b; width: 100%; }
+        .section-title { font-size: 2.5em; margin-bottom: 40px; color: #38bdf8; position: relative; }
+        .section-title::after { content: ''; display: block; width: 80px; height: 4px; background: #38bdf8; margin: 10px auto; }
 
+        /* Картки товарів */
         .products {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
             width: 100%;
             max-width: 1200px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .card {
             background: #1f2937;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 25px;
+            border-radius: 15px;
             border: 1px solid #374151;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
         }
-        .card:hover { border-color: #38bdf8; }
+        .card:hover { transform: translateY(-10px); border-color: #38bdf8; box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2); }
 
         .card img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #38bdf8;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
         }
 
-        .price { font-weight: bold; color: #38bdf8; font-size: 1.3em; margin-top: 10px; }
+        .card h3 { font-size: 1.4em; margin-bottom: 10px; color: #f8fafc; }
+        .card p { color: #94a3b8; font-size: 0.95em; margin-bottom: 15px; flex-grow: 1; }
+        .price { font-weight: bold; color: #38bdf8; font-size: 1.5em; }
 
+        /* Сторінка товару */
         #product-page {
             display: none;
-            padding: 150px 5% 50px;
-            max-width: 1200px;
+            padding: 140px 5% 60px;
+            max-width: 1300px;
             margin: 0 auto;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
             text-align: left;
-            align-items: start;
         }
 
         .product-left img {
             width: 100%;
-            border-radius: 12px;
-            border: 1px solid #38bdf8;
+            border-radius: 15px;
+            border: 2px solid #38bdf8;
             position: sticky;
-            top: 150px;
+            top: 140px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
-
-        .product-right h2 { font-size: 2em; margin-bottom: 15px; color: #38bdf8; line-height: 1.2; }
-        .product-right .price-large { font-size: 2.2em; margin: 20px 0; color: #fff; font-weight: bold; }
-        
-        .specs-container { margin-top: 30px; }
-        .specs-container h4 { color: #38bdf8; text-transform: uppercase; margin: 25px 0 15px; border-bottom: 1px solid #374151; padding-bottom: 5px; }
-        .spec-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1e293b; font-size: 0.95em; }
-        .spec-label { color: #94a3b8; }
-        .spec-value { color: #f8fafc; font-weight: 500; text-align: right; margin-left: 10px; }
-
-        .description-text { margin: 20px 0; color: #cbd5e1; }
-        .description-text p { margin-bottom: 15px; }
-        .description-text ul { margin-left: 20px; margin-bottom: 20px; }
 
         .back-btn {
-            background: #374151;
+            background: #334155;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-weight: bold;
             transition: 0.3s;
+            display: inline-block;
         }
-        .back-btn:hover { background: #4b5563; }
+        .back-btn:hover { background: #475569; }
 
-        footer { background: #111827; text-align: center; padding: 20px; }
+        .product-right h2 { font-size: 2.5em; margin-bottom: 20px; color: #38bdf8; line-height: 1.2; }
+        .price-large { font-size: 2.5em; margin: 25px 0; color: #fff; font-weight: bold; }
+        
+        .buy-btn {
+            background: #38bdf8;
+            color: #000;
+            padding: 18px 45px;
+            font-size: 1.2em;
+            font-weight: 800;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 40px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .buy-btn:hover { background: white; transform: scale(1.02); }
 
-        @media (max-width: 768px) {
-            #product-page { grid-template-columns: 1fr; padding-top: 100px; }
+        .description-text { color: #cbd5e1; font-size: 1.1em; }
+        .description-text p { margin-bottom: 20px; }
+        .description-text ul { margin-left: 25px; margin-bottom: 25px; }
+        .description-text li { margin-bottom: 10px; }
+
+        .specs-container h4 {
+            color: #38bdf8;
+            text-transform: uppercase;
+            margin: 35px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #334155;
+            letter-spacing: 1px;
+        }
+
+        .spec-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #1e293b; }
+        .spec-label { color: #94a3b8; }
+        .spec-value { color: #f8fafc; font-weight: 500; }
+
+        footer { background: #111827; text-align: center; padding: 40px; border-top: 1px solid #1e293b; margin-top: 50px; }
+
+        @media (max-width: 992px) {
+            #product-page { grid-template-columns: 1fr; }
             .product-left img { position: static; }
+            .hero h1 { font-size: 2.5em; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h2 onclick="showMain()" style="cursor:pointer">FishPro</h2>
+    <div class="logo" onclick="showMain()">FishPro</div>
     <nav>
         <a onclick="showMain()" id="m1">Головна</a>
         <a href="#catalog" onclick="showMain()" id="m2">Каталог</a>
-        <a href="#blog" id="m3">Блог</a>
-        <a href="#reviews" id="m4">Відгуки</a>
-        <a href="#contact" id="m5">Контакти</a>
+        <a href="#" id="m3">Блог</a>
+        <a href="#" id="m4">Відгуки</a>
+        <a href="#" id="m5">Контакти</a>
     </nav>
     <div class="lang-switch">
         <button class="lang-btn" onclick="setLanguage('uk')">UA</button>
@@ -171,26 +214,26 @@
     </section>
 
     <section id="catalog">
-        <h2 id="cat-title">Каталог товарів</h2>
+        <h2 class="section-title" id="cat-title">Каталог товарів</h2>
         <div class="products">
             <div class="card" onclick="openProduct('spinning')">
                 <img src="91.jfif" alt="Spinning">
                 <h3 id="p1-t">Спінінг Golden Catch Flick</h3>
-                <p id="p1-d">Ультралайтове вудилище з гнучким та пружним бланком.</p>
+                <p id="p1-d">Ультралайтове вудилище з гнучким та пружним бланком для делікатної ловлі.</p>
                 <div class="price">2 450 грн</div>
             </div>
 
             <div class="card" onclick="openProduct('reel')">
                 <img src="92.webp" alt="Reel">
                 <h3 id="p2-t">Котушка LINNHUE EA 12000</h3>
-                <p id="p2-d">Надійна котушка з плавним ходом для далеких закидів.</p>
+                <p id="p2-d">Надійна безінерційна котушка з плавним ходом та потужним фрикціоном.</p>
                 <div class="price">1 800 грн</div>
             </div>
 
             <div class="card" onclick="openProduct('lures')">
                 <img src="93.webp" alt="Lures">
                 <h3 id="p3-t">Набір воблерів Columbia Orbit</h3>
-                <p id="p3-d">Професійні суспендери для лову щуки та окуня.</p>
+                <p id="p3-d">Професійні приманки-суспендери для полювання на щуку та окуня.</p>
                 <div class="price">950 грн</div>
             </div>
         </div>
@@ -200,13 +243,14 @@
 <div id="product-page">
     <div class="product-left">
         <button class="back-btn" id="back-btn-text" onclick="showMain()">← Назад до каталогу</button>
-        <img id="pp-img" src="" alt="Product Image">
+        <img id="pp-img" src="" alt="Товар">
     </div>
-    <div class="product-right" id="pp-content"></div>
+    <div class="product-right" id="pp-content">
+        </div>
 </div>
 
-<footer id="contact">
-    <p>© 2026 FishPro Ukraine</p>
+<footer>
+    <p>© 2026 FishPro Ukraine. Всі права захищені.</p>
 </footer>
 
 <script>
@@ -217,17 +261,17 @@
         uk: {
             m1: "Головна", m2: "Каталог", m3: "Блог", m4: "Відгуки", m5: "Контакти",
             ht: "Професійні рибальські снасті", ct: "Каталог товарів",
-            p1t: "Спінінг Golden Catch Flick", p1d: "Ультралайтове вудилище з гнучким та пружним бланком.",
-            p2t: "Котушка LINNHUE EA 12000", p2d: "Надійна котушка з плавним ходом для далеких закидів.",
-            p3t: "Набір воблерів Columbia Orbit", p3d: "Професійні суспендери для лову щуки та окуня.",
-            back: "← Назад до каталогу", buy: "КУПИТИ"
+            p1t: "Спінінг Golden Catch Flick", p1d: "Ультралайтове вудилище з гнучким та пружним бланком для делікатної ловлі.",
+            p2t: "Котушка LINNHUE EA 12000", p2d: "Надійна безінерційна котушка з плавним ходом та потужним фрикціоном.",
+            p3t: "Набір воблерів Columbia Orbit", p3d: "Професійні приманки-суспендери для полювання на щуку та окуня.",
+            back: "← Назад до каталогу", buy: "КУПИТИ ЗАРАЗ"
         },
         en: {
             m1: "Home", m2: "Catalog", m3: "Blog", m4: "Reviews", m5: "Contact",
             ht: "Professional Fishing Gear", ct: "Product Catalog",
-            p1t: "Golden Catch Flick Rod", p1d: "Ultralight rod with flexible and resilient blank.",
-            p2t: "LINNHUE EA 12000 Reel", p2d: "Reliable reel with smooth action for long casts.",
-            p3t: "Columbia Orbit Lure Set", p3d: "Professional suspenders for pike and perch.",
+            p1t: "Golden Catch Flick Rod", p1d: "Ultralight rod with flexible and resilient blank for delicate fishing.",
+            p2t: "LINNHUE EA 12000 Reel", p2d: "Reliable spinning reel with smooth action and powerful drag.",
+            p3t: "Columbia Orbit Lure Set", p3d: "Professional suspender lures for pike and perch hunting.",
             back: "← Back to Catalog", buy: "BUY NOW"
         }
     };
@@ -242,7 +286,7 @@
                     <p>Ультралайтове вудилище Flick володіє дуже гнучким і в той же час пружним бланком, який забезпечує комфортний заброс і анімацію приманок у всьому тестовому діапазоні вудилища. Гнучкий кінчик дозволяє візуально контролювати торкання дна під час проведення і найделікатніші покльовки.</p>
                     <p>Вудлище оснащене противозахлестными легкими кільцями SiC К-серії зі вставками з високим ступенем полірування, що знижує тертя, продовжує термін служби ліски/шнура і збільшує дальність закидання. Рознесена ергономічна рукоятка з EVA і ергономічна гайка катушкотримача забезпечує хороший баланс і комфорт в будь-яких погодних умовах.</p>
                     <p>Незважаючи на дуже витончений бланк, вудилище володіє високими, як для спінінгів такого класу, стримуючими характеристиками, дозволяє впоратися навіть з відносно великими трофеями.</p>
-                    <p>Flick, як і годиться справжньому ультралайтовому вудилища, відмінно справляється з усіма типами дрібних приманок. Забезпечує чудовий заброс і контроль над микроджиговыми приманками, відмінно справляється з микроколебалками, дрібними кренками.</p>
+                    <p>Flick, як і годиться справжньому ультралайтовому вудилища, відмінно справляється з усіма типами дрібних приманок. Забезпечує чудовий заброс і контроль над микроджиговыми приманками, відмінно справляється з микроколебалками, дрібними кренками і навіть, у разі необхідності, дозволяє закинути і провести силіконові приманки в розмірі 2-2,5 дюйма з вагою вантажу близьким до верхнього тесту вудилища.</p>
                 `,
                 specs: `
                     <h4>Характеристики та опис</h4>
@@ -257,17 +301,39 @@
                     <div class="spec-item"><span class="spec-label">Матеріал вудилища</span> <span class="spec-value">Карбон</span></div>
                     <div class="spec-item"><span class="spec-label">Довжина в розкладеному вигляді</span> <span class="spec-value">2.03 м</span></div>
                     <div class="spec-item"><span class="spec-label">Сезон</span> <span class="spec-value">Літо</span></div>
+                    <div class="spec-item"><span class="spec-label">Колір</span> <span class="spec-value">Золотистий</span></div>
                     <div class="spec-item"><span class="spec-label">Матеріал рукоятки</span> <span class="spec-value">ЕВА</span></div>
-                    <h4>Додаткові параметри</h4>
-                    <div class="spec-item"><span class="spec-label">Лад</span> <span class="spec-value">Супер-швидкий (Extra-Fast)</span></div>
-                    <div class="spec-item"><span class="spec-label">Рекомендований шнур</span> <span class="spec-value">0.1 - 0.4 PE</span></div>
+                    <h4>Технічні дані:</h4>
+                    <div class="spec-item"><span class="spec-label">Тест:</span> <span class="spec-value">0,3-4 г.</span></div>
+                    <div class="spec-item"><span class="spec-label">Матеріал бланка:</span> <span class="spec-value">Графіт</span></div>
+                    <div class="spec-item"><span class="spec-label">Лад:</span> <span class="spec-value">Супер-швидкий (Extra-Fast)</span></div>
+                    <div class="spec-item"><span class="spec-label">Рекомендований шнур:</span> <span class="spec-value">0.1 - 0.4 PE</span></div>
                 `
             },
             en: {
-                title: "Golden Catch Flick FLS-682ULS 2.03m 0.3-4g",
-                price: "2 450 UAH",
-                desc: `<p>Ultralight Flick rod features a flexible and resilient blank for superior casting performance. SiC K-series rings increase durability and casting distance. Ergonomic EVA handle provides balance in all weather conditions.</p>`,
-                specs: `<h4>Specifications</h4><div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">76 g</span></div><div class="spec-item"><span class="spec-label">Brand</span><span class="spec-value">Golden Catch</span></div>`
+                title: "Golden Catch Flick FLS-682ULS Spinning Rod 2.03m 0.3-4g",
+                price: "2,450 UAH",
+                desc: `
+                    <p>The Flick ultralight rod features a very flexible and simultaneously resilient blank that ensures comfortable casting and lure animation across the entire test range. The flexible tip allows you to visually monitor bottom contact during retrieval and detect the most delicate bites.</p>
+                    <p>The rod is equipped with lightweight anti-tangle SiC K-series rings with high-polish inserts, which reduces friction, extends line life, and increases casting distance. The split ergonomic EVA handle and reel seat nut provide excellent balance and comfort in all weather conditions.</p>
+                    <p>Despite its very slim blank, the rod possesses high restraining power for its class, allowing it to handle relatively large trophies.</p>
+                    <p>Flick, as fits a true ultralight rod, handles all types of small lures perfectly. It provides excellent casting and control over micro-jig lures, handles micro-spoons and small cranks flawlessly, and if necessary, allows for casting and retrieving 2-2.5 inch silicone lures with a weight close to the rod's upper test limit.</p>
+                `,
+                specs: `
+                    <h4>Characteristics and Description</h4>
+                    <div class="spec-item"><span class="spec-label">Weight</span> <span class="spec-value">76 g</span></div>
+                    <div class="spec-item"><span class="spec-label">Manufacturer</span> <span class="spec-value">Golden Catch</span></div>
+                    <div class="spec-item"><span>Folded Length</span> <span>107 cm</span></div>
+                    <div class="spec-item"><span>Type</span> <span>Spinning</span></div>
+                    <div class="spec-item"><span>Sections</span> <span>2</span></div>
+                    <div class="spec-item"><span>Construction</span> <span>Plug-in</span></div>
+                    <div class="spec-item"><span>Class</span> <span>Ultralight</span></div>
+                    <div class="spec-item"><span>Casting Test</span> <span>0.5-6 g</span></div>
+                    <div class="spec-item"><span>Blank Material</span> <span>Carbon</span></div>
+                    <div class="spec-item"><span>Unfolded Length</span> <span>2.03 m</span></div>
+                    <div class="spec-item"><span>Season</span> <span>Summer</span></div>
+                    <div class="spec-item"><span>Handle Material</span> <span>EVA</span></div>
+                `
             }
         },
         reel: {
@@ -277,14 +343,16 @@
                 price: "1 800 грн",
                 desc: `
                     <p>Котушка безінерційна LINNHUE EA 12000 — це ідеальний вибір як для рибалок-початківців, так і для досвідчених любителів риболовлі. Поєднуючи в собі надійність, легкість і високу продуктивність, ця котушка стане вашим надійним помічником на водоймах.</p>
-                    <p>Однією з ключових особливостей LINNHUE EA є її безінерційна конструкція, яка значно знижує ризик утворення «бороди» при закиданні. Завдяки цьому, ви зможете зосередитися на процесі, а не на усуненні неполадок.</p>
+                    <p>Однією з ключових особливостей LINNHUE EA є її безінерційна конструкція, яка значно знижує ризик утворення «бороди» при закиданні. Це робить її особливо привабливою для новачків. Завдяки цьому, ви зможете зосередитися на процесі, а не на усуненні неполадок.</p>
                     <h4>Переваги:</h4>
                     <ul>
-                        <li><strong>Легка вага:</strong> Катушка виготовлена з комбінації металу та пластику.</li>
-                        <li><strong>Універсальний передавальний коефіцієнт:</strong> 4.9:1 для різних стилів ловлі.</li>
-                        <li><strong>Задній фрикційне гальмо:</strong> Захист від обриву волосіні.</li>
-                        <li><strong>Ергономічна ручка:</strong> Запобігає вислизанню з рук.</li>
+                        <li><strong>Легка вага:</strong> Катушка виготовлена з комбінації металу та пластику, що забезпечує мінімальну вагу без шкоди для міцності.</li>
+                        <li><strong>Універсальний передавальний коефіцієнт:</strong> 4.9:1 дозволяє використовувати котушку для різних стилів ловлі.</li>
+                        <li><strong>Задній фрикційне гальмо:</strong> Забезпечує захист від обриву волосіні та допомагає контролювати ривки риби.</li>
+                        <li><strong>Ергономічна ручка:</strong> Спеціальна форма ручки запобігає вислизанню з рук.</li>
+                        <li><strong>Місткість:</strong> Котушка вміщує значну кількість волосіні для дальніх закидів.</li>
                     </ul>
+                    <p>Вибираючи продукцію LINNHUE, ви отримуєте надійне обладнання за доступною ціною, здатне конкурувати з більш дорогими аналогами.</p>
                 `,
                 specs: `
                     <h4>Основні характеристики</h4>
@@ -293,43 +361,83 @@
                     <div class="spec-item"><span class="spec-label">Матеріал корпусу</span> <span class="spec-value">Пластик, Метал</span></div>
                     <div class="spec-item"><span class="spec-label">Тип</span> <span class="spec-value">Безінерційна</span></div>
                     <div class="spec-item"><span class="spec-label">Фрикційне гальмо</span> <span class="spec-value">Заднє</span></div>
+                    <h4>Користувальницькі характеристики</h4>
                     <div class="spec-item"><span class="spec-label">Місткість шпулі</span> <span class="spec-value">0.40/400, 0.47/330, 0.52/290</span></div>
+                    <div class="spec-item"><span class="spec-label">Кількість підшипників</span> <span class="spec-value">12+1</span></div>
                     <div class="spec-item"><span class="spec-label">Передавальний коефіцієнт</span> <span class="spec-value">4.9:1</span></div>
+                    <div class="spec-item"><span class="spec-label">Розмір шпулі</span> <span class="spec-value">12000</span></div>
                 `
             },
             en: {
-                title: "LINNHUE EA 12000 Reel",
-                price: "1 800 UAH",
-                desc: `<p>Reliable spinning reel for long casts. Features 4.9:1 gear ratio and rear drag system to protect your line during fish fighting.</p>`,
-                specs: `<h4>Specifications</h4><div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">679 g</span></div>`
+                title: "LINNHUE EA 12000 Spinning Reel",
+                price: "1,800 UAH",
+                desc: `
+                    <p>The LINNHUE EA 12000 spinning reel is an ideal choice for both beginners and experienced fishing enthusiasts. Combining reliability, lightness, and high performance, this reel will become your dependable assistant on the water.</p>
+                    <p>One of the key features of the LINNHUE EA is its spin-free design, which significantly reduces the risk of line tangles during casting. This makes it particularly attractive for beginners. Thanks to this, you can focus on the process rather than troubleshooting.</p>
+                    <h4>Advantages:</h4>
+                    <ul>
+                        <li><strong>Lightweight:</strong> Made from a metal and plastic combination for minimum weight without sacrificing strength.</li>
+                        <li><strong>Universal Gear Ratio:</strong> 4.9:1 allows the reel to be used for various fishing styles.</li>
+                        <li><strong>Rear Drag:</strong> Provides protection against line breakage and helps control fish surges.</li>
+                        <li><strong>Ergonomic Handle:</strong> Special handle shape prevents slipping from hands.</li>
+                        <li><strong>Capacity:</strong> Holds a significant amount of line for long-distance casting.</li>
+                    </ul>
+                `,
+                specs: `
+                    <h4>Main Specifications</h4>
+                    <div class="spec-item"><span>Brand</span> <span>LINNHUE</span></div>
+                    <div class="spec-item"><span>Weight</span> <span>679 g</span></div>
+                    <div class="spec-item"><span>Body Material</span> <span>Plastic, Metal</span></div>
+                    <div class="spec-item"><span>Type</span> <span>Spinning</span></div>
+                    <div class="spec-item"><span>Bearings</span> <span>12+1</span></div>
+                    <div class="spec-item"><span>Gear Ratio</span> <span>4.9:1</span></div>
+                `
             }
         },
         lures: {
             img: "93.webp",
             uk: {
-                title: "Воблер Columbia Orbit 110 SP-SR",
+                title: "Набір воблерів Columbia Orbit 110 SP-SR",
                 price: "950 грн",
                 desc: `
                     <p>Серія воблерів Orbit від компанії Columbia Fishing була створена найкращими конструкторами цілеспрямовано для лову басса. Однак в Україні вони користуються величезною популярністю при лові щуки та окуня.</p>
-                    <p>Orbit 110 SP-SR є універсалом і користується найбільшою популярністю у рибалок. Всередині розташована спеціальна балансувальна система Mag Drive Super High Balanced System з вантажем MZ-19 з вольфраму. Ця система сприяє покращенню балістики воблера, завдяки чому підвищується дальність закидання.</p>
-                    <p>Також у "голові" воблера закріплений обтяжувач у формі латунного барила. Завдяки цьому при твічингу воблер Orbit "апетитно клює носом", що нагадує хижаку малька, який годується.</p>
+                    <p>Orbit 110 SP-SR є універсалом і користується найбільшою популярністю у рибалок. Всі воблери даної серії є суспендерами. Кожен воблер Orbit має округле в перетині, подовжене тіло. Розробниками компанії була придумана така конструкція для того, щоб зробити приманки обтічними і удосконалити їх ковзання.</p>
+                    <p>Всередині воблера Orbit розташована спеціальна балансувальна система Mag Drive Super High Balanced System з вантажем MZ-19 з вольфраму. Ця система сприяє покращенню балістики воблера, завдяки чому підвищується дальність закидання, а також дозволяє контролювати розташування приманок у воді при проводці. Також в "голові" всіх воблерів закріплений обтяжувач, який має форму латунного барила. Завдяки невеликому переміщенню вантажу в "голову" воблера, приманка має неповторну гру. Під час твічингу воблер Orbit "апетитно клює носом", що нагадує хижаку малька, який годується.</p>
+                    <p>При лові воблером Orbit використовують такі методи анімації, як рівномірна проводка з зупинками і прискореннями, а також різкий, активний твічинг. Різні і одночасно максимально доповнюють один одного моделі Orbit працюють розрахунково і злагоджено.</p>
                 `,
                 specs: `
                     <h4>Характеристики та опис</h4>
                     <div class="spec-item"><span class="spec-label">Тип</span> <span class="spec-value">Воблер</span></div>
                     <div class="spec-item"><span class="spec-label">Форма тіла</span> <span class="spec-value">Мінноу (Minnow)</span></div>
+                    <div class="spec-item"><span class="spec-label">Країна виробник</span> <span class="spec-value">Китай</span></div>
+                    <div class="spec-item"><span class="spec-label">Конструкція</span> <span class="spec-value">Шумовий</span></div>
                     <div class="spec-item"><span class="spec-label">Вага</span> <span class="spec-value">16.5 г</span></div>
-                    <div class="spec-item"><span class="spec-label">Довжина</span> <span class="spec-value">110 мм</span></div>
                     <div class="spec-item"><span class="spec-label">Плавучість</span> <span class="spec-value">Суспендер</span></div>
-                    <div class="spec-item"><span class="spec-label">Глибина макс.</span> <span class="spec-value">1.2 м</span></div>
+                    <div class="spec-item"><span class="spec-label">Довжина</span> <span class="spec-value">110 мм</span></div>
                     <div class="spec-item"><span class="spec-label">Кількість гачків</span> <span class="spec-value">3</span></div>
+                    <h4>Робоча глибина</h4>
+                    <div class="spec-item"><span class="spec-label">Максимальна</span> <span class="spec-value">1.2 м</span></div>
+                    <div class="spec-item"><span class="spec-label">Мінімальна</span> <span class="spec-value">0.8 м</span></div>
                 `
             },
             en: {
                 title: "Columbia Orbit 110 SP-SR Lure Set",
                 price: "950 UAH",
-                desc: `<p>Professional minnow lures with Mag Drive system. Perfect for pike and perch fishing. Suspender buoyancy and realistic swimming action.</p>`,
-                specs: `<h4>Specifications</h4><div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">16.5 g</span></div><div class="spec-item"><span class="spec-label">Length</span><span class="spec-value">110 mm</span></div>`
+                desc: `
+                    <p>The Orbit series of lures from Columbia Fishing was created by top designers specifically for bass fishing. However, in Ukraine, they are extremely popular for pike and perch fishing.</p>
+                    <p>The Orbit 110 SP-SR is a versatile model and is the most popular among anglers. All lures in this series are suspenders. Each Orbit lure has a rounded cross-section and an elongated body. The designers came up with this shape to make the lures aerodynamic and improve their gliding action.</p>
+                    <p>Inside the Orbit lure is a special Mag Drive Super High Balanced System with an MZ-19 tungsten weight. This system improves the lure's ballistics, increasing casting distance and allowing control over the lure's position during retrieval. A brass barrel-shaped weight is also fixed in the "head" of all lures. Due to the small weight shift to the head, the lure has a unique action. During twitching, the Orbit lure "appetizingly dives with its nose," mimicking a feeding baitfish to the predator.</p>
+                    <p>When fishing with an Orbit lure, animation methods like steady retrieve with pauses and accelerations, as well as sharp, active twitching, are used. These models work precisely and harmoniously regardless of fishing conditions.</p>
+                `,
+                specs: `
+                    <h4>Specifications</h4>
+                    <div class="spec-item"><span>Type</span> <span>Lure (Minnow)</span></div>
+                    <div class="spec-item"><span>Weight</span> <span>16.5 g</span></div>
+                    <div class="spec-item"><span>Length</span> <span>110 mm</span></div>
+                    <div class="spec-item"><span>Buoyancy</span> <span>Suspender</span></div>
+                    <div class="spec-item"><span>Working Depth</span> <span>0.8 - 1.2 m</span></div>
+                    <div class="spec-item"><span>Hooks</span> <span>3</span></div>
+                `
             }
         }
     };
@@ -369,7 +477,7 @@
             <h2>${content.title}</h2>
             <div class="description-text">${content.desc}</div>
             <div class="price-large">${content.price}</div>
-            <button class="lang-btn" style="padding: 15px 40px; font-size: 1.1em; width: 100%;">${uiLang[currentLang].buy}</button>
+            <button class="buy-btn">${uiLang[currentLang].buy}</button>
             <div class="specs-container">${content.specs}</div>
         `;
     }
@@ -378,7 +486,9 @@
         currentProductType = null;
         document.getElementById('main-content').style.display = 'block';
         document.getElementById('product-page').style.display = 'none';
+        window.scrollTo(0,0);
     }
 </script>
+
 </body>
 </html>
