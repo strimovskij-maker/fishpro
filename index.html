@@ -1,86 +1,116 @@
 
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Світ технологій</title>
+<title>FishPro Ukraine</title>
 
 <style>
-body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    scroll-behavior:smooth;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-header{
-    background:#111;
-    color:white;
-    padding:15px;
-    position:fixed;
-    width:100%;
+html {
+  scroll-behavior: smooth;
 }
 
-nav a{
-    color:white;
-    margin:0 15px;
-    text-decoration:none;
-    font-weight:bold;
+body {
+  background: #0f172a;
+  color: white;
 }
 
-nav a:hover{
-    color:#00c3ff;
+header {
+  background: #111827;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
 }
 
-section{
-    padding:100px 20px;
-    min-height:100vh;
+nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
-.hero{
-    background:linear-gradient(120deg,#00c3ff,#005bea);
-    color:white;
-    text-align:center;
+nav a:hover {
+  color: #38bdf8;
 }
 
-.cards{
-    display:flex;
-    flex-wrap:wrap;
-    gap:20px;
-    justify-content:center;
+section {
+  padding: 100px 20px;
+  min-height: 100vh;
 }
 
-.card{
-    width:250px;
-    padding:20px;
-    background:#f4f4f4;
-    border-radius:10px;
-    transition:0.3s;
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover;
+  text-align: center;
 }
 
-.card:hover{
-    transform:translateY(-5px);
+.hero h1 {
+  font-size: 3em;
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.gallery img{
-    width:300px;
-    border-radius:10px;
-    margin:10px;
+.btn {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #38bdf8;
+  border: none;
+  color: black;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 8px;
 }
 
-footer{
-    background:#111;
-    color:white;
-    text-align:center;
-    padding:20px;
+.btn:hover {
+  transform: scale(1.1);
 }
 
-/* Mobile */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #1f2937;
+  padding: 20px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px #38bdf8;
+}
+
+footer {
+  background: #111827;
+  text-align: center;
+  padding: 20px;
+}
+
 @media(max-width:768px){
-    .cards{
-        flex-direction:column;
-        align-items:center;
-    }
+  nav {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>
 </head>
@@ -88,55 +118,76 @@ footer{
 <body>
 
 <header>
+<h2>FishPro Ukraine</h2>
 <nav>
-<a href="#home">Головна</a>
-<a href="#tech">Технології</a>
-<a href="#gallery">Галерея</a>
-<a href="#contact">Контакти</a>
+<a href="#home" data-ua="Головна" data-en="Home">Home</a>
+<a href="#catalog" data-ua="Каталог" data-en="Catalog">Catalog</a>
+<a href="#sales" data-ua="Акції" data-en="Sales">Sales</a>
+<a href="#blog" data-ua="Блог" data-en="Blog">Blog</a>
+<a href="#reviews" data-ua="Відгуки" data-en="Reviews">Reviews</a>
+<a href="#contact" data-ua="Контакти" data-en="Contact">Contact</a>
 </nav>
 </header>
 
-<section id="home" class="hero">
-<h1>Світ сучасних технологій</h1>
-<p>Сайт про інновації, штучний інтелект та майбутнє IT.</p>
+<section class="hero" id="home">
+<h1 data-ua="Професійні рибальські снасті" data-en="Professional Fishing Gear">
+Professional Fishing Gear
+</h1>
+<button class="btn" data-ua="Перейти до каталогу" data-en="Go to Catalog">
+Go to Catalog
+</button>
 </section>
 
-<section id="tech">
-<h2>Популярні технології</h2>
-<div class="cards">
-<div class="card">
-<h3>Штучний інтелект</h3>
-<p>AI змінює спосіб роботи та навчання людей.</p>
-</div>
-
-<div class="card">
-<h3>Веб-розробка</h3>
-<p>HTML, CSS та JavaScript — основа сучасного інтернету.</p>
-</div>
-
-<div class="card">
-<h3>Кібербезпека</h3>
-<p>Захист даних стає ключовою навичкою XXI століття.</p>
-</div>
+<section id="catalog">
+<h2 data-ua="Каталог товарів" data-en="Product Catalog">Product Catalog</h2>
+<div class="products">
+<div class="card"><h3>Carbon Rod</h3><p>$120</p></div>
+<div class="card"><h3>Spinning Reel</h3><p>$85</p></div>
+<div class="card"><h3>Fishing Lures Set</h3><p>$45</p></div>
+<div class="card"><h3>Fishing Backpack</h3><p>$60</p></div>
 </div>
 </section>
 
-<section id="gallery" class="gallery">
-<h2>Галерея</h2>
-<img src="https://picsum.photos/300/200?1">
-<img src="https://picsum.photos/300/200?2">
-<img src="https://picsum.photos/300/200?3">
+<section id="sales">
+<h2 data-ua="Акції" data-en="Sales">Sales</h2>
+<p data-ua="Знижка 20% на всі котушки!" data-en="20% discount on all reels!">
+20% discount on all reels!
+</p>
+</section>
+
+<section id="blog">
+<h2 data-ua="Блог про риболовлю" data-en="Fishing Blog">Fishing Blog</h2>
+<p data-ua="Корисні поради для початківців та професіоналів."
+data-en="Useful tips for beginners and professionals.">
+Useful tips for beginners and professionals.
+</p>
+</section>
+
+<section id="reviews">
+<h2 data-ua="Відгуки клієнтів" data-en="Customer Reviews">Customer Reviews</h2>
+<p>"Great quality and fast delivery!"</p>
 </section>
 
 <section id="contact">
-<h2>Контакти</h2>
-<p>Email: example@email.com</p>
-<p>Telegram: @username</p>
+<h2 data-ua="Контакти" data-en="Contact">Contact</h2>
+<p>Email: fishpro@email.com</p>
+<p>Phone: +380 00 000 0000</p>
 </section>
 
 <footer>
-<p>© 2026 Світ технологій</p>
+<p>© 2026 FishPro Ukraine</p>
 </footer>
+
+<script>
+const userLang = navigator.language || navigator.userLanguage;
+const elements = document.querySelectorAll("[data-ua]");
+
+if(userLang.startsWith("uk")){
+  elements.forEach(el => el.textContent = el.getAttribute("data-ua"));
+} else {
+  elements.forEach(el => el.textContent = el.getAttribute("data-en"));
+}
+</script>
 
 </body>
 </html>
