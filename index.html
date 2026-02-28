@@ -10,12 +10,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: Arial, sans-serif;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             background: #0f172a;
@@ -24,8 +22,8 @@
         }
 
         header {
-            background: rgba(17, 24, 39, 0.95);
-            padding: 15px 5%;
+            background: #111827;
+            padding: 20px;
             position: fixed;
             width: 100%;
             top: 0;
@@ -33,131 +31,103 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(56, 189, 248, 0.3);
-        }
-
-        header h2 {
-            color: #38bdf8;
-            font-size: 1.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         nav a {
             color: white;
-            margin-left: 20px;
+            margin: 0 15px;
             text-decoration: none;
             transition: 0.3s;
-            font-size: 0.95rem;
-            font-weight: 500;
         }
 
-        nav a:hover {
-            color: #38bdf8;
-        }
+        nav a:hover { color: #38bdf8; }
 
         section {
-            padding: 120px 8%;
+            padding: 100px 20px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background-attachment: fixed;
             background-size: cover;
             background-position: center;
-            position: relative;
+            background-attachment: fixed;
         }
 
-        section::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.75);
-            z-index: 1;
+        /* ТА САМА ПЕРША ФОТОГРАФІЯ */
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                              url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
         }
 
-        section > * {
-            position: relative;
-            z-index: 2;
+        #catalog { background: #1e293b; }
+
+        .hero h1 {
+            font-size: 3em;
+            background: rgba(0,0,0,0.6);
+            padding: 20px;
+            border-radius: 10px;
         }
-
-        .hero { background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=2070'); }
-        #catalog { background-image: url('https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?q=80&w=2071'); }
-        #sales { background-image: url('https://images.unsplash.com/photo-1516108317508-6788f6a160e6?q=80&w=1974'); }
-        #contact { background-image: url('https://images.unsplash.com/photo-1511216173273-040f7b596231?q=80&w=2070'); }
-
-        h1 { font-size: 3.5rem; margin-bottom: 20px; }
-        h2 { font-size: 2.8rem; margin-bottom: 40px; color: #38bdf8; }
 
         .btn {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 15px 45px;
+            margin-top: 20px;
+            padding: 12px 25px;
             background: #38bdf8;
             border: none;
-            color: #0f172a;
-            font-size: 1.1rem;
-            font-weight: bold;
+            color: black;
             cursor: pointer;
             transition: 0.3s;
-            border-radius: 50px;
+            border-radius: 8px;
             text-decoration: none;
+            font-weight: bold;
         }
 
-        .btn:hover {
-            transform: scale(1.05);
-            background: #fff;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
-        }
-
-        /* КАТАЛОГ */
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 20px;
             width: 100%;
-            max-width: 1300px;
+            max-width: 1200px;
+            margin-top: 30px;
         }
 
         .card {
-            background: rgba(30, 41, 59, 0.85);
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            transition: 0.4s;
-            backdrop-filter: blur(10px);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            background: #1f2937;
+            padding: 15px;
+            border-radius: 12px;
+            transition: 0.3s;
+            border: 1px solid #374151;
+        }
+
+        /* СТИЛЬ ДЛЯ ФОТО ТОВАРУ */
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
         .card:hover {
             transform: translateY(-10px);
-            border-color: #38bdf8;
-            background: rgba(30, 41, 59, 0.95);
+            box-shadow: 0 0 20px #38bdf8;
         }
 
-        .card h3 { color: #38bdf8; font-size: 1.4rem; margin-bottom: 10px; }
-        .card p { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 15px; }
-        .price { font-size: 1.3rem; font-weight: bold; color: #fff; }
+        .price {
+            font-weight: bold;
+            color: #38bdf8;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
 
         footer {
-            background: #0f172a;
+            background: #111827;
             text-align: center;
-            padding: 50px;
-            border-top: 1px solid rgba(56, 189, 248, 0.2);
-        }
-
-        @media(max-width:768px){
-            nav { display: none; }
-            h1 { font-size: 2.5rem; }
+            padding: 20px;
         }
     </style>
 </head>
-
 <body>
 
 <header>
@@ -174,92 +144,55 @@
     <h1 data-ua="Професійні рибальські снасті" data-en="Professional Fishing Gear">
         Professional Fishing Gear
     </h1>
-    <a href="#catalog" class="btn" data-ua="Каталог товарів" data-en="Product Catalog">
-        Каталог товарів
-    </a>
+    <a href="#catalog" class="btn" data-ua="Перейти до каталогу" data-en="Go to Catalog">Go to Catalog</a>
 </section>
 
 <section id="catalog">
-    <h2 data-ua="Каталог" data-en="Catalog">Каталог</h2>
+    <h2 data-ua="Каталог" data-en="Catalog">Catalog</h2>
     <div class="products">
+        
         <div class="card">
+            <img src="https://images.unsplash.com/photo-1615910402438-48b967000213?q=80&w=1000" alt="Spinning">
             <h3>Спінінг Carbon Pro</h3>
-            <p>Високочутливий спінінг для лову хижака. Легкий графітовий корпус та зручна ергономічна ручка.</p>
+            <p data-ua="Високочутливий спінінг для лову хижака." data-en="High-sensitivity spinning rod for predators.">High-sensitivity spinning rod for predators.</p>
             <div class="price">2 450 грн</div>
         </div>
 
         <div class="card">
-            <h3>Котушка Shimano Master</h3>
-            <p>Надійна котушка з плавним ходом та системою миттєвого стопора.</p>
+            <h3>Котушка Shimano</h3>
+            <p>Надійна котушка з плавним ходом.</p>
             <div class="price">1 800 грн</div>
         </div>
 
         <div class="card">
-            <h3>Набір воблерів (10 шт)</h3>
-            <p>Універсальний набір приманок для різних типів водойм та риби.</p>
+            <h3>Набір воблерів</h3>
+            <p>10 універсальних приманок.</p>
             <div class="price">950 грн</div>
         </div>
-
-        <div class="card">
-            <h3>Шнур плетений 150м</h3>
-            <p>Надміцний шнур з високою стійкістю до стирання.</p>
-            <div class="price">550 грн</div>
-        </div>
-
-        <div class="card">
-            <h3>Рибальський рюкзак</h3>
-            <p>Водонепроникний та місткий рюкзак з багатьма відділеннями.</p>
-            <div class="price">1 200 грн</div>
-        </div>
-
-        <div class="card">
-            <h3>Підсак алюмінієвий</h3>
-            <p>Складний підсак з прогумованою сіткою, що не травмує рибу.</p>
-            <div class="price">750 грн</div>
-        </div>
-
-        <div class="card">
-            <h3>Набір гачків Owner</h3>
-            <p>Найгостріші гачки професійної серії для надійного клювання.</p>
-            <div class="price">120 грн</div>
-        </div>
-
-        <div class="card">
-            <h3>Ехолот портативний</h3>
-            <p>Компактний пристрій для пошуку риби та вимірювання глибини.</p>
-            <div class="price">4 100 грн</div>
-        </div>
-
-        <div class="card">
-            <h3>Чохол для вудок 130см</h3>
-            <p>Жорсткий чохол для безпечного транспортування твого спорядження.</p>
-            <div class="price">890 грн</div>
-        </div>
-
-        <div class="card">
-            <h3>Коробка для снастей</h3>
-            <p>Зручний органайзер для дрібних аксесуарів та приманок.</p>
-            <div class="price">320 грн</div>
-        </div>
+        
+        <div class="card"><h3>Шнур 150м</h3><p>Надміцний</p><div class="price">550 грн</div></div>
+        <div class="card"><h3>Рюкзак</h3><p>Водонепроникний</p><div class="price">1200 грн</div></div>
+        <div class="card"><h3>Підсак</h3><p>Алюмінієвий</p><div class="price">750 грн</div></div>
+        <div class="card"><h3>Гачки Owner</h3><p>Професійні</p><div class="price">120 грн</div></div>
+        <div class="card"><h3>Ехолот</h3><p>Портативний</p><div class="price">4100 грн</div></div>
+        <div class="card"><h3>Чохол</h3><p>130 см</p><div class="price">890 грн</div></div>
+        <div class="card"><h3>Коробка</h3><p>Для дрібниць</p><div class="price">320 грн</div></div>
     </div>
 </section>
 
 <section id="sales">
-    <h2 data-ua="Акції" data-en="Sales">Акції</h2>
-    <p data-ua="Знижка 20% на всі котушки до кінця тижня!" data-en="20% discount on all reels!">
-        Знижка 20% на всі котушки до кінця тижня!
-    </p>
+    <h2 data-ua="Акції" data-en="Sales">Sales</h2>
+    <p data-ua="Знижка 20% на всі котушки!" data-en="20% discount on all reels!">20% discount on all reels!</p>
 </section>
 
 <section id="contact">
-    <h2 data-ua="Контакти" data-en="Contact">Контакти</h2>
-    <p>Email: info@fishpro.ua</p>
-    <p>Телефон: +380 67 000 00 00</p>
-    <p>Адреса: м. Київ, вул. Рибальська, 1</p>
+    <h2 data-ua="Контакти" data-en="Contact">Contact</h2>
+    <p>Email: fishpro@email.com</p>
+    <p>Phone: +380 00 000 0000</p>
 </section>
 
 <footer>
-    <p>© 2026 FishPro Ukraine. Всі права захищені.</p>
+    <p>© 2026 FishPro Ukraine</p>
 </footer>
 
 <script>
